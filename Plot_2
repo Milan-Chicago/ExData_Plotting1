@@ -1,0 +1,39 @@
+
+
+
+
+ library(timeDate)
+> 
+> 
+> # pull household_power_consumption from 2007-02-01 to 2007-02-02
+> household_power_consumption$Date=as.character(household_power_consumption$Date)
+> household_power_consumption.new=subset(household_power_consumption, Date=="1/2/2007" | Date=="2/2/2007")
+> 
+> # convert dd/mm/yyyy to yyyy/mm/dd
+> household_power_consumption.new$Date=as.Date(household_power_consumption.new[,1], "%d/%m/%Y")
+> household_power_consumption.new$DateTime=paste(household_power_consumption.new[,1], household_power_consumption.new[,2], sep=" ")
+> household_power_consumption.new$DateTime=timeDate(household_power_consumption.new$DateTime)
+> 
+> # define Global_active_power as numeric
+> household_power_consumption.new$Global_active_power=as.numeric(as.character(household_power_consumption.new$Global_active_power))
+> 
+> with(household_power_consumption.new, plot(DateTime, Global_active_power, col="black", type="l",
++                     xlab="",
++                     ylab="Global Active Power (kilowalts)",
++                     ylim=range(0,7.5,4)))
+> 
+> # ave the plot as plot2.png
+> dev.copy(png, file="plot2.png")
+png 
+  7 
+> dev.off
+function (which = dev.cur()) 
+{
+    if (which == 1) 
+        stop("cannot shut down device 1 (the null device)")
+    .External(C_devoff, as.integer(which))
+    dev.cur()
+}
+<bytecode: 0x00000000095b1428>
+<environment: namespace:grDevices>
+> 

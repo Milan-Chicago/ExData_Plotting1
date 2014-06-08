@@ -1,0 +1,59 @@
+ExData_Plotting3
+ +================
+ +
+ +Plotting Assignment 3 for Exploratory Data Analysis
+ +
+ +# read data
+ +
+ + household_power_consumption <- read.csv("C:/Users/Milan Mcgraw/Desktop/Coursera/exdata-data-household_power_consumption/household_power_consumption.txt", sep=";")
+ +>   View(household_power_consumption)
+ library(timeDate)
+> 
+> # pull household_power_consumption from 2007-02-01 to 2007-02-02
+> household_power_consumption$Date=as.character(household_power_consumption$Date)
+> household_power_consumption.new=subset(household_power_consumption, Date=="1/2/2007" | Date=="2/2/2007")
+> 
+> # convert dd/mm/yyyy to yyyy/mm/dd
+> household_power_consumption.new$Date=as.Date(household_power_consumption.new[,1], "%d/%m/%Y")
+> household_power_consumption.new$DateTime=paste(household_power_consumption.new[,1], household_power_consumption.new[,2], sep=" ")
+> household_power_consumption.new$DateTime=timeDate(household_power_consumption.new$DateTime)
+> 
+> # define Sub_metering as numeric
+> household_power_consumption.new$Sub_metering_1=as.numeric(as.character(household_power_consumption.new$Sub_metering_1))
+> household_power_consumption.new$Sub_metering_2=as.numeric(as.character(household_power_consumption.new$Sub_metering_2))
+> household_power_consumption.new$Sub_metering_3=as.numeric(as.character(household_power_consumption.new$Sub_metering_3))
+> 
+> with(household_power_consumption.new, plot(DateTime, Sub_metering_1, col="black", type="l",
++                     xlab="",
++                     ylab="Energy sub metering",
++                     ylim=range(0,38,4)))
+> 
+> par(new=T)
+> with(household_power_consumption.new, plot(DateTime, Sub_metering_2, col="red", type="l",
++                     xlab="",
++                     ylab="Energy sub metering",
++                     ylim=range(0,38,4)))
+> 
+> par(new=T)
+> with(household_power_consumption.new, plot(DateTime, Sub_metering_3, col="blue", type="l",
++                     xlab="",
++                     ylab="Energy sub metering",
++                     ylim=range(0,38,4)))
+> # add legend
+> legend("topright", lty=1, col=c("black","red", "blue"), legend=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
+> 
+> # save the plot as plot3.png
+> dev.copy(png, file="plot3.png")
+png 
+  8 
+> dev.off
+function (which = dev.cur()) 
+{
+    if (which == 1) 
+        stop("cannot shut down device 1 (the null device)")
+    .External(C_devoff, as.integer(which))
+    dev.cur()
+}
+<bytecode: 0x00000000095b1428>
+<environment: namespace:grDevices>
+> 

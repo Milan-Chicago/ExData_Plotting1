@@ -1,5 +1,13 @@
 
+ExData_Plotting1
+================
 
+Plotting Assignment 2 for Exploratory Data Analysis timeDate
+
+# read data
+
+ household_power_consumption <- read.csv("C:/Users/Milan Mcgraw/Desktop/Coursera/exdata-data-household_power_consumption/household_power_consumption.txt", sep=";")
+>   View(household_power_consumption)
 
 
  library(timeDate)

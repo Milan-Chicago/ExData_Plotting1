@@ -1,0 +1,22 @@
+# pull household_power_consumption from 2007-02-01 to 2007-02-02
+> household_power_consumption$Date=as.character(household_power_consumption$Date)
+> household_power_consumption.new=subset(household_power_consumption, Date=="1/2/2007" | Date=="2/2/2007")
+> # convert dd/mm/yyyy to yyyy/mm/dd
+> household_power_consumption.new$Date=as.Date(household_power_consumption.new[,1], "%d/%m/%Y")
+> 
+> # define Global_active_power as numeric
+> household_power_consumption.new$Global_active_power=as.numeric(as.character(household_power_consumption.new$Global_active_power))
+> # plot xy plot
+> hist(household_power_consumption.new$Global_active_power, col="red", breaks=12, 
++      main="Global Active Power", 
++      xlab="Global Active Power (kilowalts)",
++      ylim=range(0,1200,6))
+> 
+> # save the plot as plot1.png
+> dev.copy(png, file="plot1.png") #,width=8,height=6,units="in",res=300)
+png 
+  4 
+> dev.off()
+RStudioGD 
+        2 
+> 
